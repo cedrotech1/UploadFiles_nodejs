@@ -1,6 +1,6 @@
 // services/emailService.js
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey("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");
+sgMail.setApiKey("");
 
 const sendEmail = async (to, subject, text,from) => {
   const msg = {
