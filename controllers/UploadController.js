@@ -1,5 +1,6 @@
 // controllers/mediaController.js
 const cloudinary = require('../helpers/cloudinary');
+const sendEmailService = require('../services/emailService');
 
 // Function to upload a video
 exports.uploadVideo = async (req, res) => {
@@ -40,3 +41,22 @@ let url=result.secure_url
     res.status(500).json({ message: 'Server Error' });
   }
 };
+
+// controllers/emailController.js
+
+exports.sendEmail = async (req, res) => {
+  const { to, subject, text,from } = req.body;
+
+  if (!to || !subject || !text ) {
+    return res.status(400).json({ message: 'All fields are required: to, subject, text' });
+  }
+
+  try {
+    await sendEmailService(to, subject, text,from);
+    res.status(200).json({ message: 'Email sent successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to send email' });
+  }
+};
+

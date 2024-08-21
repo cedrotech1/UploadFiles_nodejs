@@ -7,10 +7,7 @@ const Controller = require('../controllers/UploadController');
 const storage = multer.diskStorage({});
 const upload = multer({ storage });
 
-router.post('/upload', upload.single('video'), Controller.uploadVideo);
-router.post('/upload/pic', upload.single('image'), Controller.uploadImage);
 
-// email staffs
 router.post('/send-email', Controller.sendEmail);
 
 
